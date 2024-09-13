@@ -1,5 +1,6 @@
 version: '3'
 services:
+###################
   mongodb:
     build:
       context: mongo
@@ -11,18 +12,21 @@ services:
       options:
         max-size: "25m"
         max-file: "2"
+ ######################       
   redis:
     image: redis:6.2-alpine
     networks:
       - robot-shop
     logging:
       <<: *logging
+  #####################    
   rabbitmq:
     image: rabbitmq:3.8-management-alpine
     networks:
       - robot-shop
     logging:
       <<: *logging
+   ####################  
   catalogue:
     build:
       context: catalogue
@@ -38,6 +42,7 @@ services:
       retries: 3
     logging:
       <<: *logging
+  ########################    
   user:
     build:
       context: user
@@ -54,6 +59,8 @@ services:
       retries: 3
     logging:
       <<: *logging
+
+    ######################
   cart:
     build:
       context: cart
@@ -69,6 +76,8 @@ services:
       retries: 3
     logging:
       <<: *logging
+##############################
+      
   mysql:
     build:
       context: mysql
@@ -79,6 +88,7 @@ services:
       - robot-shop
     logging:
       <<: *logging
+   #######################   
   shipping:
     build:
       context: shipping
@@ -94,6 +104,8 @@ services:
       retries: 3
     logging:
       <<: *logging
+###########################
+      
   ratings:
     build:
       context: ratings
@@ -111,6 +123,8 @@ services:
       retries: 3
     logging:
       <<: *logging
+
+  ########################    
   payment:
     build:
       context: payment
@@ -129,6 +143,8 @@ services:
       #PAYMENT_GATEWAY: "https://www.worldpay.com"
     logging:
       <<: *logging
+
+   ############################   
   dispatch:
     build:
       context: dispatch
@@ -139,6 +155,8 @@ services:
       - robot-shop
     logging:
       <<: *logging
+
+##########################      
   web:
     build:
       context: web
@@ -166,6 +184,8 @@ services:
       # INSTANA_EUM_REPORTING_URL: <your reporting url>
     logging:
       <<: *logging
+
+  #########################
 
 networks:
   robot-shop:
