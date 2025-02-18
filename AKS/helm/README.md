@@ -14,6 +14,16 @@ $ helm install --name robot-shop --namespace robot-shop .
 $ kubectl create ns robot-shop
 $ helm install robot-shop --namespace robot-shop .
 ```
+### Ingress Controller
+Application Gateway Ingress Controller addon is not supported with Azure CNI Overlay. So use this command in Azure CLI
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+
+helm install nginx-ingress ingress-nginx/ingress-nginx `
+    --namespace ingress-basic `
+    --create-namespace `
+    --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz
 
 ## Images
 
